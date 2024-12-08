@@ -20,7 +20,7 @@ spec:
         - containerPort: 80
         env:
         - name: API_URL
-          value: "http://10.105.95.152:3000"
+          value: "http://localhost:3000"
 
       - name: backend
         imagePullPolicy: Never
