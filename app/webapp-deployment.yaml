@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: frontend
+        image: client:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: API_URL
+          value: "http://10.105.95.152:3000"
+
+      - name: backend
+        imagePullPolicy: Never
+        image: server:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: "10.105.95.152"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          value: "root"
+        - name: DB_NAME
+          value: "projetkub"
