@@ -7,10 +7,14 @@ spec:
   selector:
     matchLabels:
       app: webapp
+      component: backend
   template:
     metadata:
       labels:
         app: webapp
+        component: backend
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/component: backend
     spec:
       containers:
       - name: frontend
@@ -20,7 +24,7 @@ spec:
         - containerPort: 80
         env:
         - name: API_URL
-          value: "http://localhost:3000"
+          value: "http://backend-service:3000"
 
       - name: backend
         imagePullPolicy: Never
