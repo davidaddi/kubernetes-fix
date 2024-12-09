@@ -17,7 +17,7 @@ function App() {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({ key: "", value: "", description: "" });
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.API_URL || 'http://backend-service:3000';
+  const API_URL = process.env.API_URL || '10.244.0.77:3000';
 
   const fetchData = async () => {
     setLoading(true);
@@ -141,6 +141,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

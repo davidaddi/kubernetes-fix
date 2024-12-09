@@ -1,28 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp
+  name: backend
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: webapp
+      tier: backend
+  replicas: 1
   template:
     metadata:
       labels:
         app: webapp
-        app.kubernetes.io/component: frontend
+        tier: backend
     spec:
       containers:
-        - name: frontend
-          image: client:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 80
-          env:
-            - name: API_URL
-              value: "http://backend-service:3000"
-        
         - name: backend
           image: server:latest
           imagePullPolicy: Never
@@ -30,7 +22,7 @@ spec:
             - containerPort: 3000
           env:
             - name: DB_HOST
-              value: "10.105.95.152"
+              value: "mysql"
             - name: DB_PORT
               value: "3306"
             - name: DB_USER
